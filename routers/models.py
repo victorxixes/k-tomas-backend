@@ -1,0 +1,61 @@
+from sqlalchemy import Column, Integer, String
+from database import Base
+
+# -----------------------------
+# Appointment
+# -----------------------------
+class Appointment(Base):
+    __tablename__ = "appointments"
+
+    id = Column(Integer, primary_key=True, index=True)
+    client = Column(String, nullable=False)
+    service = Column(String, nullable=False)
+    stylist = Column(String, nullable=False)
+    date = Column(String, nullable=False)
+    time = Column(String, nullable=False)
+
+# -----------------------------
+# Client
+# -----------------------------
+class Client(Base):
+    __tablename__ = "clients"
+
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String, nullable=False)
+    phone = Column(String, nullable=True)
+    email = Column(String, nullable=True)
+    created_at = Column(String, nullable=False)
+
+# -----------------------------
+# Horarios
+# -----------------------------
+class Horarios(Base):
+    __tablename__ = "horarios"
+
+    id = Column(Integer, primary_key=True, index=True)
+    day = Column(String, nullable=False)
+    open_time = Column(String, nullable=False)
+    close_time = Column(String, nullable=False)
+    is_closed = Column(Integer, default=0)
+
+# -----------------------------
+# ServiceConfig
+# -----------------------------
+class ServiceConfig(Base):
+    __tablename__ = "service_config"
+
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String, nullable=False)
+    duration = Column(Integer, nullable=False)
+    price = Column(Integer, nullable=False)
+
+# -----------------------------
+# User
+# -----------------------------
+class User(Base):
+    __tablename__ = "users"
+
+    id = Column(Integer, primary_key=True, index=True)
+    email = Column(String, unique=True, index=True, nullable=False)
+    password_hash = Column(String, nullable=False)
+    role = Column(String, nullable=False, default="empleado")
